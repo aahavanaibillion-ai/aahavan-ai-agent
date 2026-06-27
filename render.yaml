@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: aahavan-ai-agent
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python aahavan-ai-cloud.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
