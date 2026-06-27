@@ -291,7 +291,13 @@ def get_db():
     conn.row_factory = sqlite3.Row
     return conn
 
-@app.get("/")
+# HTML DASHBOARD - This must come FIRST to serve at root /
+@app.get("/", response_class=HTMLResponse)
+def web_interface():
+    return HTML_PAGE
+
+# API Status endpoint (moved from / to /api/status)
+@app.get("/api/status")
 def root():
     return {"message": "Aahavan AI Agent is running on cloud!", "status": "live"}
 
@@ -788,10 +794,6 @@ HTML_PAGE = """
 </body>
 </html>
 """
-
-@app.get("/", response_class=HTMLResponse)
-def web_interface():
-    return HTML_PAGE
 
 if __name__ == "__main__":
     print("=" * 50)
